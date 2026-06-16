@@ -17,15 +17,18 @@ interface Props {
   thirst: number
   wood: number
   stone: number
+  maxHealth?: number
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  maxHealth: 100,
+})
 
 const stats = computed<StatItem[]>(() => [
   {
     label: '生命值',
     value: props.health,
-    max: 100,
+    max: props.maxHealth,
     icon: '❤️',
     color: 'text-red-400',
     barColor: 'bg-red-500',
